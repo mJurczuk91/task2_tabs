@@ -6,11 +6,16 @@ const tabs = [ {label: string, content: string} ]
 domyślnie aktywna jest pierwsza zakładka
 komponent wyświetla się poprawnie na mobile oraz desktop */
 
+let tabs = [];
+
 function createTabsComponent(container, config) {
-    let tabs = [];
     let tabMenu = document.createElement("div");
     tabMenu.setAttribute("class", "tab-menu");
-    container.appendChild(tabMenu);
+    let content = document.createElement("div");
+    content.setAttribute("id", "tab-content");
+    content.setAttribute("class", "tab-content");
+
+    container.append(tabMenu, content);
 
     if(Array.isArray(config)){
         for(let el of config){
@@ -23,12 +28,13 @@ function createTabsComponent(container, config) {
 
     for(let item of tabs){
         tabMenu.appendChild(item.tab);
-        container.appendChild(item.content);
     }
+
+    setActiveTab(tabs[0].tab.textContent);
 }
 
 function createTab(label, content){
-    let tab = document.createElement("button");
+    let tab = document.createElement("div");
     tab.setAttribute("class", "tab-item");
     tab.onclick = () => { setActiveTab(label) };
     tab.textContent = label;
@@ -48,5 +54,14 @@ function createTabContent(label, content) {
 }
 
 function setActiveTab(label) {
-    console.log(label);
+    let contentContainer = document.getElementById("tab-content");
+    contentContainer.innerHTML = "";
+    for(let tab of tabs){
+        if(tab.tab.textContent !== label){
+            tab.tab.setAttribute("class", "tab-item");
+        } else {
+            tab.tab.setAttribute("class", "tab-item active");
+            contentContainer.appendChild(tab.content);
+        }
+    }
 }
