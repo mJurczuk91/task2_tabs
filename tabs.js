@@ -27,27 +27,26 @@ function createTabsComponent(container, config) {
     }
 
     for(let item of tabs){
-        tabMenu.appendChild(item.tab);
+        tabMenu.appendChild(item.label);
     }
 
-    setActiveTab(tabs[0].tab.textContent);
+    setActiveTab(tabs[0].label.textContent);
 }
 
 function createTab(label, content){
-    let tab = document.createElement("div");
-    tab.setAttribute("class", "tab-item");
-    tab.onclick = () => { setActiveTab(label) };
-    tab.textContent = label;
+    let tabLabel = document.createElement("div");
+    tabLabel.setAttribute("class", "tab-item");
+    tabLabel.onclick = () => { setActiveTab(label) };
+    tabLabel.textContent = label;
 
     let tabContent = createTabContent(label, content);
 
-    return {tab: tab, content: tabContent};
+    return {label: tabLabel, content: tabContent};
 }
 
-function createTabContent(label, content) {
+function createTabContent(content) {
     let tabContent = document.createElement("div");
     tabContent.setAttribute("class", "tab-content");
-    tabContent.setAttribute("id", label);
     tabContent.textContent = content;
     
     return tabContent;
@@ -57,10 +56,10 @@ function setActiveTab(label) {
     let contentContainer = document.getElementById("tab-content");
     contentContainer.innerHTML = "";
     for(let tab of tabs){
-        if(tab.tab.textContent !== label){
-            tab.tab.setAttribute("class", "tab-item");
+        if(tab.label.textContent !== label){
+            tab.label.setAttribute("class", "tab-item");
         } else {
-            tab.tab.setAttribute("class", "tab-item active");
+            tab.label.setAttribute("class", "tab-item active");
             contentContainer.appendChild(tab.content);
         }
     }

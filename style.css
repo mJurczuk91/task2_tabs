@@ -1,13 +1,35 @@
 .tab-menu {
-    
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 100%;
 }
 
 .tab-item {
-
+    text-align: center;
+    width: 10em;
+    padding: 0.5em 4em 0.5em 4em;
+    margin: 0 0.2em 0 0.2em;
+    border-bottom: solid 0.2em lightgray;
+    transition: 0.4s;
 }
+
+.tab-item:hover {
+    border-bottom: solid 0.2em gray;
+    cursor: pointer;
+}
+
+.tab-item.active {
+    border-bottom: solid 0.2em black;
+}
+
+.tab-item.active:hover{
+    cursor: pointer;
+}
+
 .tab-content {
-
-}
-.active {
-
+    margin-top: 3em;
+    font-size: larger;
+    width: 100%;
+    text-align: center;
 }
